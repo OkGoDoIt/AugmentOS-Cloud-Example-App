@@ -6,7 +6,7 @@ build:
   context: .
   dockerfile: ./docker/Dockerfile
 services:
-  - name: reminders-tpa
+  - name: augmentos-example-app
     type: web
     run: bun run start
     port: 80

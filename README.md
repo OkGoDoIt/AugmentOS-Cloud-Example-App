@@ -1,74 +1,82 @@
-# Reminders App for AugmentOS
+# AugmentOS-Cloud-Example-App
 
-This app provides reminder management functionality for AugmentOS smart glasses.
+### Install AugmentOS on your phone
 
-## Features
+AugmentOS install links: [AugmentOS.org/install](https://AugmentOS.org/install)
 
-- Create reminders through Mira AI with due dates
-- View your active and completed reminders
-- Mark reminders as complete or incomplete
-- Delete reminders
-- Manage reminders through an authenticated webview interface
+### (Easiest way to get started) Set up ngrok
 
-## Development
+1. `brew install ngrok`
 
-### Prerequisites
+2. Make an ngrok account
 
-- [Bun](https://bun.sh/) for JavaScript/TypeScript runtime
-- [AugmentOS Developer Account](https://console.augmentos.org)
+3. [Use ngrok to make a static address/URL](https://dashboard.ngrok.com/)
 
-### Setup and Development
+### Register your APP with AugmentOS
 
-#### Local Development
+<img width="181" alt="image" src="https://github.com/user-attachments/assets/36192c2b-e1ba-423b-90de-47ff8cd91318" />
 
-```bash
-# Install dependencies
-bun install
+1. Navigate to [console.AugmentOS.org](https://console.AugmentOS.org/)
 
-# Start development server
-bun run index.ts
-```
+2. Click "Sign In", and log in with the same account you're using for AugmentOS
 
-### Environment Variables
+3. Click "Create App"
 
-The app uses the following environment variables:
+4. Set a unique package name like `com.yourName.yourAppName`
 
-- `PORT` - Port to run the server on (default: 3000)
-- `PACKAGE_NAME` - App package name (must match the package name in the [AugmentOS Developer Console](https://console.augmentos.org/tpas))
-- `API_KEY` - Your AugmentOS API key (get this from the [AugmentOS Developer Console](https://console.augmentos.org/tpas))
+5. For "Public URL", enter your Ngrok's static URL
 
-Copy the example environment file `.env.example` to create your own `.env` file:
+### Get your APP running!
 
-```bash
-cp .env.example .env
-```
+1. [Install bun](https://bun.sh/docs/installation)
 
-Edit the `.env` file with your own values.
+2. Clone this repo: `git clone git@github.com:AugmentOS-Community/AugmentOS-Cloud-Example-App.git`
 
-### Deployment
+3. cd into your repo, then type `bun install`
 
-To deploy this app to AugmentOS:
+4. Set up your environment variables:
+   * Create a `.env` file in the root directory by copying the example: `cp .env.example .env`
+   * Edit the `.env` file with your app details:
+     ```
+     PORT=3000
+     PACKAGE_NAME=com.yourName.yourAppName
+     API_KEY=your_api_key_from_console
+     ```
+   * Make sure the `PACKAGE_NAME` matches what you registered in the AugmentOS Console
+   * Get your `API_KEY` from the AugmentOS Developer Console
 
-1. Register in the AugmentOS Developer Console
-2. Create a new TPA and get your API key
-3. Deploy the app to a publicly accessible URL (potentially using ngrok for local development)
-4. Configure your app in the AugmentOS Developer Console to set the correct url and webview url (publicurl.com/webview)
+5. Run your app with `bun run dev`
 
-### Authenticated Webview
+6. To expose your app to the internet (and thus AugmentOS) with ngrok, run: `ngrok http --url=<YOUR_NGROK_URL_HERE> 3000`
+    * `3000` is the port. It must match what is in the app config. If you entered `port: 8080`, use `8080` for ngrok instead.
 
-The app provides an authenticated webview endpoint for users to manage their reminders:
+
+### Next Steps
+
+Check out the full documentation at [docs.AugmentOS.org](https://docs.augmentos.org/core-concepts)
+
+#### Update your `tpa_config.json`
+
+The `tpa_config.json` file is used to configure your app. It is used to define settings and tools that your app exposes.
+
+#### Subscribing to events
+
+You can listen for transcriptions, translations, and other events within the onSession function.
+
+#### Authenticated Webview
+
+The app can provide an authenticated webview endpoint for users:
 
 - Access the webview at `/webview`
 - Authentication is handled automatically for AugmentOS users
 - The current AugmentOS user is available at request.authUserId
-- Users can view, create, complete, and delete reminders through a convenient web interface
+- Create a web interface that allows users to interact with your app's functionality
 
-### Tool Calls
+#### Tool Calls
 
-The app responds to the following tool calls via `handleToolCall` in `src/tools.ts`:
+Your app can respond to tool calls via `handleToolCall` in your code:
 
-- `add_todo` - Add a new reminder
-- `get_todos` - Get all reminders
-- `mark_todo_complete` - Mark a reminder as complete
-- `mark_todo_incomplete` - Mark a reminder as incomplete
-- `delete_todo` - Delete a reminder
+- Define custom tools that can be called by AugmentOS
+- Each tool takes specific parameters and returns a result
+- Tools can perform operations on your application's data
+- Properly handle authentication and validation in your tool implementations
