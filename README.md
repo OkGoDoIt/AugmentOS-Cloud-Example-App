@@ -34,17 +34,49 @@ AugmentOS install links: [AugmentOS.org/install](https://AugmentOS.org/install)
 
 3. cd into your repo, then type `bun install`
 
-4. Edit your `index.ts` to match the app you registered at [console.AugmentOS.org](https://console.AugmentOS.org/)
-    
-```typescript
-const app = new ExampleAugmentOSApp({
-  packageName: 'com.yourName.yourAppName', // The packageName you specified on console.AugmentOS.org
-  apiKey: 'your_api_key', // Get this from console.AugmentOS.org
-  port: 3000 // The port you're hosting the server on
-});
-```
+4. Set up your environment variables:
+   * Create a `.env` file in the root directory by copying the example: `cp .env.example .env`
+   * Edit the `.env` file with your app details:
+     ```
+     PORT=3000
+     PACKAGE_NAME=com.yourName.yourAppName
+     API_KEY=your_api_key_from_console
+     ```
+   * Make sure the `PACKAGE_NAME` matches what you registered in the AugmentOS Console
+   * Get your `API_KEY` from the AugmentOS Developer Console
 
-7. Run your app with `bun run index.ts`
+5. Run your app with `bun run dev`
 
-8. To expose your app to the internet (and thus AugmentOS) with ngrok, run: `ngrok http --url=<YOUR_NGROK_URL_HERE> 3000`
+6. To expose your app to the internet (and thus AugmentOS) with ngrok, run: `ngrok http --url=<YOUR_NGROK_URL_HERE> 3000`
     * `3000` is the port. It must match what is in the app config. If you entered `port: 8080`, use `8080` for ngrok instead.
+
+
+### Next Steps
+
+Check out the full documentation at [docs.AugmentOS.org](https://docs.augmentos.org/core-concepts)
+
+#### Update your `tpa_config.json`
+
+The `tpa_config.json` file is used to configure your app. It is used to define settings and tools that your app exposes.
+
+#### Subscribing to events
+
+You can listen for transcriptions, translations, and other events within the onSession function.
+
+#### Authenticated Webview
+
+The app can provide an authenticated webview endpoint for users:
+
+- Access the webview at `/webview`
+- Authentication is handled automatically for AugmentOS users
+- The current AugmentOS user is available at request.authUserId
+- Create a web interface that allows users to interact with your app's functionality
+
+#### Tool Calls
+
+Your app can respond to tool calls via `handleToolCall` in your code:
+
+- Define custom tools that can be called by AugmentOS
+- Each tool takes specific parameters and returns a result
+- Tools can perform operations on your application's data
+- Properly handle authentication and validation in your tool implementations
