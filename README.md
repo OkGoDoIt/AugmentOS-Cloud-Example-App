@@ -80,3 +80,6 @@ Your app can respond to tool calls via `handleToolCall` in your code:
 - Each tool takes specific parameters and returns a result
 - Tools can perform operations on your application's data
 - Properly handle authentication and validation in your tool implementations
+
+<img width="553" alt="image" src="https://github.com/user-attachments/assets/1650f49a-6561-4341-981e-ed6edbe77b57" />
+
