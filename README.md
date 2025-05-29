@@ -30,11 +30,13 @@ AugmentOS install links: [AugmentOS.org/install](https://AugmentOS.org/install)
 
 1. [Install bun](https://bun.sh/docs/installation)
 
-2. Clone this repo: `git clone git@github.com:AugmentOS-Community/AugmentOS-Cloud-Example-App.git`
+2. Create a new repo from this template: `git clone git@github.com:AugmentOS-Community/AugmentOS-Cloud-Example-App.git`
+   
+     <img width="125" alt="image" src="https://github.com/user-attachments/assets/c10e14e8-2dc5-4dfa-adac-dd334c1b73a5" />
 
-3. cd into your repo, then type `bun install`
+4. cd into your repo, then type `bun install`
 
-4. Set up your environment variables:
+5. Set up your environment variables:
    * Create a `.env` file in the root directory by copying the example: `cp .env.example .env`
    * Edit the `.env` file with your app details:
      ```
@@ -45,9 +47,9 @@ AugmentOS install links: [AugmentOS.org/install](https://AugmentOS.org/install)
    * Make sure the `PACKAGE_NAME` matches what you registered in the AugmentOS Console
    * Get your `API_KEY` from the AugmentOS Developer Console
 
-5. Run your app with `bun run dev`
+6. Run your app with `bun run dev`
 
-6. To expose your app to the internet (and thus AugmentOS) with ngrok, run: `ngrok http --url=<YOUR_NGROK_URL_HERE> 3000`
+7. To expose your app to the internet (and thus AugmentOS) with ngrok, run: `ngrok http --url=<YOUR_NGROK_URL_HERE> 3000`
     * `3000` is the port. It must match what is in the app config. If you entered `port: 8080`, use `8080` for ngrok instead.
 
 
